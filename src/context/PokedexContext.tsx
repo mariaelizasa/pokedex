@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Pokemon } from "../@types/Pokedex";
-import { getAllPokemons } from "../service/requests";
+import { getAllPokemonsWithColor } from "../service/requests";
 
 interface PokemonContextProps {
   pokemons: Pokemon[];
   loading: boolean;
+  getAllPokemonsWithColor: () => Promise<Pokemon[]>;
 }
 
 const PokemonContext = createContext<PokemonContextProps>({
   pokemons: [],
   loading: false,
+  getAllPokemonsWithColor: async () => [],
 });
 
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -21,7 +23,7 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchPokemons = async () => {
       setLoading(true);
-      const data = await getAllPokemons();
+      const data = await getAllPokemonsWithColor();
       setPokemons(data);
       setLoading(false);
     };
@@ -29,7 +31,9 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <PokemonContext.Provider value={{ pokemons, loading }}>
+    <PokemonContext.Provider
+      value={{ pokemons, loading, getAllPokemonsWithColor }}
+    >
       {children}
     </PokemonContext.Provider>
   );

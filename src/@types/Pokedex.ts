@@ -4,7 +4,7 @@ export interface PokemonUrl {
       url: string;
     }>;
   }
-  
+
 export interface PokemonStat {
   base_stat: number;
   stat: {
@@ -21,6 +21,10 @@ export interface Pokemon {
   id: number;
   name: string;
   sprites: PokemonSprites;
-  types: Array<{ type: { name: string } }>;
+  types: Array<{ type: { name: string, url: string } }>;
   stats: PokemonStat[];
+  species: {
+    url: string;
+  };
+  color?: string;
 }

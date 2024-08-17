@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif !important;
+  
   }
 
   body {
@@ -27,11 +27,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
-  @font-face {
-    font-family: 'Montserrat', sans-serif !important;
-    font-style: normal;
-    src: url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-}
+
 `;
 
 export default GlobalStyle;
