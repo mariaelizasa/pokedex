@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colorMapping } from "../../utils/utils";
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
 
 export const CardContainer = styled.div`
   display: flex;
@@ -17,12 +22,12 @@ export const Card = styled.div<CardProps>`
   height: 40vh;
   max-width: 225px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
@@ -41,6 +46,7 @@ export const Card = styled.div<CardProps>`
     background-size: contain;
     opacity: 0.3;
     z-index: 0;
+    animation: ${spin} 4s linear infinite;
   }
 `;
 
@@ -53,21 +59,23 @@ export const CardImage = styled.img`
 `;
 
 export const CardId = styled.p`
-  font-weight: 800;
+  font-weight: 500;
   padding-top: 20px;
   font-size: 28px;
   position: relative;
   margin: 0;
   z-index: 1;
   font-style: oblique;
+  font-family: "Silkscreen", sans-serif;
 `;
 export const CardName = styled.p`
   font-weight: 800;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   text-transform: capitalize;
   font-size: 20px;
   position: relative;
   margin: 0;
   z-index: 1;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Silkscreen", sans-serif;
 `;

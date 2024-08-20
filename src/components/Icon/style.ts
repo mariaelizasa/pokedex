@@ -10,5 +10,4 @@ export const IconContainer = styled.div`
 export const IconImage = styled.img`
   max-width: 350px; 
   max-height: 150px;    
- 
 `;

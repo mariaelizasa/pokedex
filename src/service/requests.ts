@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Pokemon, PokemonUrl } from "../@types/Pokedex";
 import api from "./api";
 
@@ -27,10 +28,13 @@ export const getAllPokemonsWithColor = async (): Promise<Pokemon[]> => {
   const pokemonWithColors = await Promise.all(
     data.map(async (pokemon: Pokemon) => {
       const speciesData = await getSpeciesData(pokemon.species.url);
+      
+      const types = pokemon.types.map((typeInfo: { type: { name: string } }) => typeInfo.type.name);
+
       return {
+        types: types,
         color: speciesData.color.name,
         ...pokemon,
-  
       };
     })
   );
