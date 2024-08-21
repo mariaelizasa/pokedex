@@ -7,15 +7,17 @@ import React, {
   SetStateAction,
   Dispatch,
 } from "react";
-import { Pokemon } from "../@types/Pokedex";
+import { Pokemons } from "../@types/Pokemons";
 import { getAllPokemonsWithColor } from "../service/requests";
+import { PokemonDetails } from "../@types/PokemonDetails";
 
 interface PokemonContextProps {
-  pokemons: Pokemon[];
+  pokemons: Pokemons[];
   loading: boolean;
-  getAllPokemonsWithColor: () => Promise<Pokemon[]>;
-  filteredPokemons: Pokemon[];
+  getAllPokemonsWithColor: () => Promise<Pokemons[]>;
+  filteredPokemons: Pokemons[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
+  getPokemonById: (id: number) => PokemonDetails | undefined;
 }
 
 const PokemonContext = createContext<PokemonContextProps>({
@@ -24,15 +26,16 @@ const PokemonContext = createContext<PokemonContextProps>({
   getAllPokemonsWithColor: async () => [],
   filteredPokemons: [],
   setSearchTerm: () => {},
+  getPokemonById: () => undefined
 });
 
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemons[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<Pokemons[]>([]);
 
   const filterPokemons = useCallback(() => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
@@ -45,6 +48,11 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [searchTerm, pokemons]);
 
   useEffect(() => {
+    filterPokemons();
+  }, [searchTerm, filterPokemons]);
+
+
+  useEffect(() => {
     const fetchPokemons = async () => {
       setLoading(true);
       const data = await getAllPokemonsWithColor();
@@ -54,10 +62,11 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchPokemons();
   }, []);
 
-  useEffect(() => {
-    filterPokemons();
-  }, [searchTerm, filterPokemons]);
+  const getPokemonById = useCallback((id: number) => {
+    return pokemons.find(pokemon => pokemon.id === id);
+  }, [pokemons]);
 
+ 
   return (
     <PokemonContext.Provider
       value={{
@@ -66,6 +75,7 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
         setSearchTerm,
         filteredPokemons,
         getAllPokemonsWithColor,
+        getPokemonById
       }}
     >
       {children}

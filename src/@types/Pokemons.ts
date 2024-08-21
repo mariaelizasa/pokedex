@@ -17,7 +17,7 @@ export interface PokemonSprites {
   front_shiny: string;
 }
 
-export interface Pokemon {
+export interface Pokemons {
   id: number;
   name: string;
   sprites: PokemonSprites;

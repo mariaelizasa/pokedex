@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { Pokemon } from "../../@types/Pokedex";
+import { Pokemons } from "../../@types/Pokemons";
 import { Card, CardContainer, CardId, CardImage, CardName } from "./style";
 
 interface PokemonCardProps {
-  pokemons: Pokemon[];
+  pokemons: Pokemons[];
 }
 const PokemonCard = ({ pokemons }: PokemonCardProps) => {
   const navigate = useNavigate();

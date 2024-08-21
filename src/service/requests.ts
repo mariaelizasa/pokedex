@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import { Pokemon, PokemonUrl } from "../@types/Pokedex";
+import { Pokemons, PokemonUrl } from "../@types/Pokemons";
 import api from "./api";
 
 export const getPokemonUrl = async (
@@ -9,7 +8,7 @@ export const getPokemonUrl = async (
   return response.data;
 };
 
-export const getAllPokemons = async (): Promise<Pokemon[]> => {
+export const getAllPokemons = async (): Promise<Pokemons[]> => {
   const data = await getPokemonUrl();
   const promises = data.results.map(async (pokemon: { url: string }) => {
     const response = await api.get(pokemon.url);
@@ -23,16 +22,14 @@ const getSpeciesData = async (speciesUrl: string) => {
   return response.data;
 };
 
-export const getAllPokemonsWithColor = async (): Promise<Pokemon[]> => {
+export const getAllPokemonsWithColor = async (): Promise<Pokemons[]> => {
   const data = await getAllPokemons();
   const pokemonWithColors = await Promise.all(
-    data.map(async (pokemon: Pokemon) => {
+    data.map(async (pokemon: Pokemons) => {
       const speciesData = await getSpeciesData(pokemon.species.url);
       
-      const types = pokemon.types.map((typeInfo: { type: { name: string } }) => typeInfo.type.name);
 
       return {
-        types: types,
         color: speciesData.color.name,
         ...pokemon,
       };

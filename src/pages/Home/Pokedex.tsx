@@ -15,7 +15,6 @@ const Pokedex = () => {
         <>
           <PokemonIcon />
           <FilterByNameAndId></FilterByNameAndId>
-
           <PokemonCard pokemons={filteredPokemons} />
         </>
       )}
