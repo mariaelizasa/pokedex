@@ -11,4 +11,4 @@ export const colorMapping = {
   gray: "linear-gradient(to bottom, #9D9D9D, #B0B0B0, #636363)",
   gold: "linear-gradient(to bottom, #FFD700, #F7E6B0, #F4C542)",
   silver: "linear-gradient(to bottom, #C0C0C0, #D0D0D0, #A0A0A0)",
-};
+} 

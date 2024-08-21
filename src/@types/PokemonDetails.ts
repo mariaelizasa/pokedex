@@ -8,6 +8,7 @@ export interface Stat {
 export interface Type {
   type: {
     name: string;
+    url: string
   };
 }
 
@@ -17,14 +18,15 @@ export interface Sprites {
 }
 
 export interface PokemonDetails {
-    id: number;
-    name: string;
-    color?: string; 
-    types: Type[];
-    stats: Stat[];
-    sprites: {
-      front_default: string;
-      front_shiny: string;
-    };
-  }
-  
+  id: number;
+  name: string;
+  color?: string;
+  types: Type[];
+  stats: Stat[];
+  sprites: {
+    front_default: string;
+    front_shiny: string;
+  };
+  height: number;
+  weight: number;
+}

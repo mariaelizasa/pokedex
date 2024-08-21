@@ -1,5 +1,5 @@
 import { usePokemon } from "../../context/PokedexContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Card,
   Container,
@@ -8,24 +8,37 @@ import {
   Ball,
   SectionType,
   SectionStats,
+  Button,
 } from "./style";
 
 const PokedexDetails = () => {
   const { id } = useParams<{ id: string }>();
-
-  const { getPokemonById } = usePokemon();
-
+  const { getPokemonById, setFilterType } = usePokemon();
   const pokemon = getPokemonById(Number(id));
+  const navigate = useNavigate();
+
+  const handleClick = (type: string) => {
+    setFilterType(type);
+    navigate("/");
+  };
   return (
     <Container>
       <Card color={pokemon?.color}>
         <h1>{pokemon?.name}</h1>
+        <p>Weight: {pokemon?.weight}</p>
+        <p>Height: {pokemon?.height}</p>
         <h3>{`N° 0${pokemon?.id}`}</h3>
         <SectionType color={pokemon?.color}>
           <h3>TYPES:</h3>
           {pokemon?.types.map(
             (types: { type: { name: string } }, index: number) => (
-              <p key={index}>{types.type.name}</p>
+              <Button
+                color={pokemon?.color}
+                key={index}
+                onClick={() => handleClick(types.type.name)}
+              >
+                {types.type.name}
+              </Button>
             )
           )}
         </SectionType>

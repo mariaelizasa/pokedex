@@ -20,23 +20,27 @@ export const Container = styled.div`
   animation: ${fadeInScale} 0.6s ease-out;
 `;
 
-export const Card = styled.div<CardProps>`
+export const Card = styled.div<DetailsProps>`
   display: flex;
   flex-direction: column;
   width: 80vw;
-  height: 60vh;
+  height: 90vh;
   max-width: 600px;
-  min-height: 70vh;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 65vh;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   background: ${({ color }) => colorMapping[color] || "#fff"};
-  padding: 20px;
+  padding: 30px;
   text-align: center;
+  justify-content: space-between;
 
-  position: relative;
   @media (max-width: 768px) {
-    width: 90vw;
-    height: 60vh;
+    width: 80vw;
+    height: 70vh;
+  }
+
+  @media (max-width: 480px) {
+    height: 90vh;
   }
 `;
 
@@ -47,46 +51,62 @@ export const SectionImage = styled.div`
   width: 100%;
   height: auto;
   border-radius: 50px;
-  padding: 20px;
-  z-index: 1;
 `;
 
 export const Image = styled.img`
   max-width: 100%;
   width: 150px;
   height: auto;
-  border-radius: 8px;
-  margin: 10px;
-  border: 1px solid black;
+  margin: 0 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   padding: 10px;
-  z-index: 1;
 `;
 
 export const Ball = styled.img`
-  border: 4px solid black;
+  border: 4px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
-  z-index: 1;
+  padding: 5px;
 `;
 
-export const SectionType = styled.div<CardProps>`
-  margin: 10px auto;
-  padding: 10px;
+export const SectionType = styled.div<DetailsProps>`
+  margin: 0px auto;
+  padding: 30px;
   background: ${({ color }) => color || "#fff"};
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 320px;
   text-align: center;
-  z-index: 1;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: black;
+  @media (max-width: 480px) {
+    width: 200px;
+  }
 `;
 
 export const SectionStats = styled.div`
-  margin: 10px auto;
-  padding: 10px;
+  margin: 0px auto;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   background: ${({ color }) => colorMapping[color] || "#fff"};
-  width: 300px;
+  width: 320px;
   text-align: center;
-  z-index: 1;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: black;
+
+  @media (max-width: 480px) {
+    width: 200px;
+  }
+`;
+
+export const Button = styled.button<DetailsProps>`
+  padding: 10px 30px;
+  border-radius: 8cm;
+  margin: 5px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  background-color: #ddd;
+  border: #ddd;
 `;

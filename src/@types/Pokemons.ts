@@ -3,6 +3,7 @@ export interface PokemonUrl {
       name: string;
       url: string;
     }>;
+    count: number;
   }
 
 export interface PokemonStat {
@@ -17,14 +18,28 @@ export interface PokemonSprites {
   front_shiny: string;
 }
 
+export interface Type {
+  type: {
+    name: string;
+    url: string
+  };
+}
+
 export interface Pokemons {
   id: number;
   name: string;
   sprites: PokemonSprites;
-  types: Array<{ type: { name: string, url: string } }>;
+  types: Type[];
   stats: PokemonStat[];
   species: {
     url: string;
   };
   color?: string;
+  height: number;
+  weight: number;
+}
+
+export interface PokemonResponse {
+  pokemons: Pokemons[];
+  count: number; 
 }

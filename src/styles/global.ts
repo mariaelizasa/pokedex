@@ -8,8 +8,6 @@ const GlobalStyle = createGlobalStyle`
     outline: 0;
     box-sizing: border-box;
    font-family: "Silkscreen", sans-serif !important;
-   
- 
   }
 
   body {
@@ -18,12 +16,10 @@ const GlobalStyle = createGlobalStyle`
   height: 100vh; 
   background: url('/background.png') no-repeat center center fixed;
   background-size: cover; 
- 
   }
 
   html, body {
     height: 100%;
-    
   }
 
   button {
@@ -34,8 +30,6 @@ const GlobalStyle = createGlobalStyle`
   input { 
     outline: none;
   }
-
-
 `;
 
 export default GlobalStyle;
