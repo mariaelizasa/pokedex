@@ -1,4 +1,18 @@
-export const colorMapping = {
+export type ColorKey =
+  | "red"
+  | "blue"
+  | "green"
+  | "yellow"
+  | "black"
+  | "white"
+  | "purple"
+  | "pink"
+  | "brown"
+  | "gray"
+  | "gold"
+  | "silver";
+
+export const colorMapping: Record<ColorKey, string> = {
   red: "linear-gradient(to bottom, #F08030, #FF6F61, #FF3B3B)",
   blue: "linear-gradient(to bottom, #6890F0, #6AB1E8, #0047AB)",
   green: "linear-gradient(to bottom, #78C850, #7DBE68, #006400)",
@@ -11,4 +25,4 @@ export const colorMapping = {
   gray: "linear-gradient(to bottom, #9D9D9D, #B0B0B0, #636363)",
   gold: "linear-gradient(to bottom, #FFD700, #F7E6B0, #F4C542)",
   silver: "linear-gradient(to bottom, #C0C0C0, #D0D0D0, #A0A0A0)",
-} 
+};

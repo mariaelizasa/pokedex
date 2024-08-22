@@ -1,6 +1,9 @@
 import styled, { keyframes } from "styled-components";
-import { colorMapping } from "../../utils/utils";
+import { ColorKey, colorMapping } from "../../utils/utils";
 
+interface CardProps{
+  color: ColorKey
+}
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

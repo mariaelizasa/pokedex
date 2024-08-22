@@ -6,6 +6,7 @@ import React, {
   useCallback,
   SetStateAction,
   Dispatch,
+  useMemo,
 } from "react";
 import { PokemonResponse, Pokemons } from "../@types/Pokemons";
 import { getAllPokemonsWithColor, getAllTypes } from "../service/requests";
@@ -16,8 +17,11 @@ interface PokemonContextProps {
   types: Type[];
   filterType: string;
   loading: boolean;
-  getAllPokemonsWithColor: (limit: number, offset: number) => Promise<PokemonResponse>; 
-  filteredPokemons: Pokemons[];
+  getAllPokemonsWithColor: (
+    limit: number,
+    offset: void
+  ) => Promise<PokemonResponse>;
+  filterPokemons: Pokemons[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
   getPokemonById: (id: number) => PokemonDetails | undefined;
   setFilterType: Dispatch<SetStateAction<string>>;
@@ -31,7 +35,7 @@ const PokemonContext = createContext<PokemonContextProps>({
   pokemons: { pokemons: [], count: 0 },
   loading: false,
   getAllPokemonsWithColor: async () => ({ pokemons: [], count: 0 }),
-  filteredPokemons: [],
+  filterPokemons: [],
   setSearchTerm: () => {},
   getPokemonById: () => undefined,
   setFilterType: () => {},
@@ -50,17 +54,18 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [filteredPokemons, setFilteredPokemons] = useState<Pokemons[]>([]);
   const [filterType, setFilterType] = useState<string>("");
   const [types, setTypes] = useState<Type[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const limit = 20;
-  const offset = (currentPage - 1) * limit;
 
+  const offset = useMemo(() => {
+    (currentPage - 1) * limit;
+  }, [currentPage, limit]);
 
-  const filterPokemons = useCallback(() => {
+  const filterPokemons = useMemo(() => {
     let filtered = pokemons.pokemons;
 
     if (searchTerm) {
@@ -74,33 +79,28 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
         pokemon.types.some((typeInfo) => typeInfo.type.name === filterType)
       );
     }
-
-    setFilteredPokemons(filtered);
+    return filtered;
   }, [searchTerm, filterType, pokemons]);
 
   useEffect(() => {
-    filterPokemons();
-  }, [searchTerm, filterPokemons, filterType]);
-
-  useEffect(() => {
     const fetchPokemons = async () => {
-      setLoading(true);
-      const { pokemons, count } = await getAllPokemonsWithColor(limit, offset);
-      setPokemons({ pokemons, count });
-      setLoading(false);
-      setTotalPages(Math.ceil(count / limit));
-
-    };
-
-    const fetchTypes = async () => {
-      setLoading(true);
-      const data = await getAllTypes();
-      setTypes(data);
+      try {
+        setLoading(true);
+        const { pokemons, count } = await getAllPokemonsWithColor(
+          limit,
+          offset
+        );
+        setPokemons({ pokemons, count });
+        setTotalPages(Math.ceil(count / limit));
+        const data = await getAllTypes();
+        setTypes(data);
+      } catch (error) {
+        console.error("Failed to get response", error);
+      }
       setLoading(false);
     };
 
     fetchPokemons();
-    fetchTypes();
   }, [currentPage, limit, offset]);
 
   const getPokemonById = useCallback(
@@ -116,7 +116,7 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
         pokemons,
         loading,
         setSearchTerm,
-        filteredPokemons,
+        filterPokemons,
         getAllPokemonsWithColor,
         totalPages,
         setCurrentPage,
@@ -132,5 +132,4 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const usePokemon = (): PokemonContextProps => useContext(PokemonContext);
-
+export const usePokemonContext = (): PokemonContextProps => useContext(PokemonContext);

@@ -1,8 +1,8 @@
-import { usePokemon } from "../../context/PokedexContext";
+import { usePokemonContext } from "../../context/PokedexContext";
 import { Input } from "./style";
 
 const FilterByNameAndId = () => {
-  const { setSearchTerm } = usePokemon();
+  const { setSearchTerm } = usePokemonContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);

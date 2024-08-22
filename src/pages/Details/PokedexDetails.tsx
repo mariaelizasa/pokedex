@@ -1,4 +1,4 @@
-import { usePokemon } from "../../context/PokedexContext";
+import { usePokemonContext } from "../../context/PokedexContext";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Card,
@@ -13,7 +13,7 @@ import {
 
 const PokedexDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const { getPokemonById, setFilterType } = usePokemon();
+  const { getPokemonById, setFilterType } = usePokemonContext();
   const pokemon = getPokemonById(Number(id));
   const navigate = useNavigate();
 

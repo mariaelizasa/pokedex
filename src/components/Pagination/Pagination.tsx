@@ -1,8 +1,8 @@
-import { usePokemon } from "../../context/PokedexContext";
+import { usePokemonContext } from "../../context/PokedexContext";
 import { Button, PaginationContainer } from "./style";
 
 const Pagination = () => {
-  const { currentPage, totalPages, setCurrentPage } = usePokemon();
+  const { currentPage, totalPages, setCurrentPage } = usePokemonContext();
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {

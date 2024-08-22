@@ -18,6 +18,5 @@ export const Button = styled.button`
   border-color: blue;
   @media (max-width: 768px) {
     width: 60vw;
-   
   }
 `;

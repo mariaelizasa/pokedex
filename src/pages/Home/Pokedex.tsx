@@ -4,11 +4,11 @@ import FilterByType from "../../components/Filters/FilterByType";
 import PokemonIcon from "../../components/Icon/PokemonIcon";
 import Loading from "../../components/Loading/Loading";
 import Pagination from "../../components/Pagination/Pagination";
-import { usePokemon } from "../../context/PokedexContext";
+import { usePokemonContext } from "../../context/PokedexContext";
 import { Filters } from "./style";
 
 const Pokedex = () => {
-  const { filteredPokemons, loading } = usePokemon();
+  const { filterPokemons, loading } = usePokemonContext();
 
   return (
     <>
@@ -21,7 +21,7 @@ const Pokedex = () => {
           <FilterByNameAndId></FilterByNameAndId>
           <FilterByType></FilterByType>
           </Filters>
-          <PokemonCard pokemons={filteredPokemons} />
+          <PokemonCard pokemons={filterPokemons} />
           <Pagination/>
         </>
       )}

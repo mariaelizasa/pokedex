@@ -1,8 +1,8 @@
-import { usePokemon } from "../../context/PokedexContext";
+import { usePokemonContext } from "../../context/PokedexContext";
 import { Label, Select } from "./style";
 
 const FilterByType = () => {
-  const { setFilterType, types, filterType } = usePokemon();
+  const { setFilterType, types, filterType } = usePokemonContext();
 
   return (
     <>
@@ -13,8 +13,8 @@ const FilterByType = () => {
       >
         <option value="">ALL</option>
         {types.map(( type: { type: { name: string, url: string } }) => (
-          <option key={type.name} value={type.name}>
-            {type.name}
+          <option key={type?.type?.name} value={type?.type?.name}>
+            {type?.type?.name}
           </option>
         ))}
       </Select>
