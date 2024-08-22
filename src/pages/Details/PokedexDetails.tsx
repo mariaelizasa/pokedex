@@ -21,6 +21,8 @@ const PokedexDetails = () => {
     setFilterType(type);
     navigate("/");
   };
+
+
   return (
     <Container>
       <Card color={pokemon?.color}>

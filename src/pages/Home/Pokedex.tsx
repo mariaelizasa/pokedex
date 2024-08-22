@@ -3,6 +3,7 @@ import FilterByNameAndId from "../../components/Filters/FilterByNameAndId";
 import FilterByType from "../../components/Filters/FilterByType";
 import PokemonIcon from "../../components/Icon/PokemonIcon";
 import Loading from "../../components/Loading/Loading";
+import NotFound from "../../components/NotFound/NotFound";
 import Pagination from "../../components/Pagination/Pagination";
 import { usePokemonContext } from "../../context/PokedexContext";
 import { Filters } from "./style";
@@ -18,11 +19,12 @@ const Pokedex = () => {
         <>
           <PokemonIcon />
           <Filters>
-          <FilterByNameAndId></FilterByNameAndId>
-          <FilterByType></FilterByType>
+            <FilterByNameAndId></FilterByNameAndId>
+            <FilterByType></FilterByType>
           </Filters>
+          {filterPokemons.length === 0 && <NotFound></NotFound>}
           <PokemonCard pokemons={filterPokemons} />
-          <Pagination/>
+          <Pagination />
         </>
       )}
     </>

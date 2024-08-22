@@ -19,10 +19,10 @@ export interface PokemonSprites {
 }
 
 export interface Type {
-
+  type: {
     name: string;
     url: string
-
+  };
 }
 
 export interface Pokemons {

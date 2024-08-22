@@ -1,6 +1,9 @@
 import styled, { keyframes } from "styled-components";
-import { colorMapping } from "../../utils/utils";
+import { ColorKey, colorMapping } from "../../utils/utils";
 
+interface DetailsProps {
+  color?: ColorKey
+}
 const fadeInScale = keyframes`
   from {
     opacity: 0;
@@ -29,7 +32,7 @@ export const Card = styled.div<DetailsProps>`
   min-height: 65vh;
   border-radius: 30px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background: ${({ color }) => colorMapping[color] || "#fff"};
+  background: ${({ color }) => color ? colorMapping[color] : "#fff"};
   padding: 30px;
   text-align: center;
   justify-content: space-between;
@@ -82,15 +85,17 @@ export const SectionType = styled.div<DetailsProps>`
   color: black;
   @media (max-width: 480px) {
     width: 200px;
+    padding: 12px;
+    font-size: 12px;
   }
 `;
 
-export const SectionStats = styled.div`
+export const SectionStats = styled.div<DetailsProps>`
   margin: 0px auto;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  background: ${({ color }) => colorMapping[color] || "#fff"};
+  background: ${({ color }) => color ? colorMapping[color] : "#fff"};
   width: 320px;
   text-align: center;
   font-weight: bold;
@@ -99,14 +104,19 @@ export const SectionStats = styled.div`
 
   @media (max-width: 480px) {
     width: 200px;
+    padding: 8px;
+    font-size: 12px;
   }
 `;
 
-export const Button = styled.button<DetailsProps>`
+export const Button = styled.button`
   padding: 10px 30px;
   border-radius: 8cm;
   margin: 5px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   background-color: #ddd;
   border: #ddd;
+  @media (max-width: 480px) {
+    padding: 5px 15px;
+  }
 `;
