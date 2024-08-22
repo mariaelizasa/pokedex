@@ -3,7 +3,7 @@ import api from "./api";
 
 export const getPokemonUrl = async (
   limit: number,
-  offset: void
+  offset: number
 ): Promise<PokemonUrl> => {
   try {
     const response = await api.get(`pokemon?limit=${limit}&offset=${offset}`);
@@ -19,7 +19,7 @@ export const getPokemonUrl = async (
 
 export const getAllPokemons = async (
   limit: number,
-  offset: void
+  offset: number
 ): Promise<PokemonResponse> => {
   try {
     const { results, count } = await getPokemonUrl(limit, offset);
@@ -50,7 +50,7 @@ const getSpeciesData = async (speciesUrl: string) => {
 
 export const getAllPokemonsWithColor = async (
   limit: number,
-  offset: void
+  offset: number
 ): Promise<PokemonResponse> => {
   try {
   const { pokemons, count } = await getAllPokemons(limit, offset);

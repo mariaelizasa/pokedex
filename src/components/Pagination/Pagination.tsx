@@ -4,6 +4,7 @@ import { Button, PaginationContainer } from "./style";
 const Pagination = () => {
   const { currentPage, totalPages, setCurrentPage } = usePokemonContext();
 
+  console.log(currentPage, "currentPage")
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((page) => page - 1);

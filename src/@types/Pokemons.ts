@@ -1,10 +1,10 @@
 export interface PokemonUrl {
-    results: Array<{
-      name: string;
-      url: string;
-    }>;
-    count: number;
-  }
+  results: Array<{
+    name: string;
+    url: string;
+  }>;
+  count: number;
+}
 
 export interface PokemonStat {
   base_stat: number;
@@ -21,7 +21,7 @@ export interface PokemonSprites {
 export interface Type {
   type: {
     name: string;
-    url: string
+    url: string;
   };
 }
 
@@ -41,5 +41,5 @@ export interface Pokemons {
 
 export interface PokemonResponse {
   pokemons: Pokemons[];
-  count: number; 
+  count: number;
 }

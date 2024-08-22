@@ -8,7 +8,7 @@ export interface Stat {
 export interface Type {
   type: {
     name: string;
-    url: string
+    url: string;
   };
 }
 
@@ -29,4 +29,8 @@ export interface PokemonDetails {
   };
   height: number;
   weight: number;
+}
+
+export interface GetTypes {
+  name: string;
 }

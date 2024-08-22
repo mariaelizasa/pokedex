@@ -10,16 +10,17 @@ import React, {
 } from "react";
 import { PokemonResponse, Pokemons } from "../@types/Pokemons";
 import { getAllPokemonsWithColor, getAllTypes } from "../service/requests";
-import { PokemonDetails, Type } from "../@types/PokemonDetails";
+import {  PokemonDetails, Type } from "../@types/PokemonDetails";
+import { Types } from "../@types/PokemonTypes";
 
 interface PokemonContextProps {
   pokemons: PokemonResponse;
-  types: Type[];
+  types: Types[];
   filterType: string;
   loading: boolean;
   getAllPokemonsWithColor: (
     limit: number,
-    offset: void
+    offset: number
   ) => Promise<PokemonResponse>;
   filterPokemons: Pokemons[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
@@ -55,15 +56,13 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filterType, setFilterType] = useState<string>("");
-  const [types, setTypes] = useState<Type[]>([]);
+  const [types, setTypes] = useState<Types[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const limit = 20;
-
-  const offset = useMemo(() => {
-    (currentPage - 1) * limit;
-  }, [currentPage, limit]);
+  
+  const offset = useMemo(() => (currentPage - 1) * limit, [currentPage, limit]);
 
   const filterPokemons = useMemo(() => {
     let filtered = pokemons.pokemons;
