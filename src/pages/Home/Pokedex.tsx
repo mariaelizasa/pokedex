@@ -10,7 +10,6 @@ import { Filters } from "./style";
 
 const Pokedex = () => {
   const { filterPokemons, loading } = usePokemonContext();
-
   return (
     <>
       {loading ? (
