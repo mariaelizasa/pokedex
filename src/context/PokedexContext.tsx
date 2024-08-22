@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { PokemonResponse, Pokemons } from "../@types/Pokemons";
 import { getAllPokemonsWithColor, getAllTypes } from "../service/requests";
-import {  PokemonDetails, Type } from "../@types/PokemonDetails";
+import { PokemonDetails, Type } from "../@types/PokemonDetails";
 import { Types } from "../@types/PokemonTypes";
 
 interface PokemonContextProps {
@@ -61,15 +61,17 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const limit = 20;
-  
+
   const offset = useMemo(() => (currentPage - 1) * limit, [currentPage, limit]);
 
   const filterPokemons = useMemo(() => {
     let filtered = pokemons.pokemons;
 
     if (searchTerm) {
-      filtered = filtered.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (pokemon) =>
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          pokemon.id.toString().includes(searchTerm)
       );
     }
 
@@ -131,4 +133,5 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const usePokemonContext = (): PokemonContextProps => useContext(PokemonContext);
+export const usePokemonContext = (): PokemonContextProps =>
+  useContext(PokemonContext);
