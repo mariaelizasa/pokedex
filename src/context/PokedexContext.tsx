@@ -16,7 +16,7 @@ interface PokemonContextProps {
   types: Type[];
   filterType: string;
   loading: boolean;
-  getAllPokemonsWithColor: () => Promise<PokemonResponse>;
+  getAllPokemonsWithColor: (limit: number, offset: number) => Promise<PokemonResponse>; 
   filteredPokemons: Pokemons[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
   getPokemonById: (id: number) => PokemonDetails | undefined;
@@ -44,22 +44,24 @@ const PokemonContext = createContext<PokemonContextProps>({
 export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [pokemons, setPokemons] = useState<Pokemons[]>([]);
+  const [pokemons, setPokemons] = useState<PokemonResponse>({
+    pokemons: [],
+    count: 0,
+  });
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredPokemons, setFilteredPokemons] = useState<Pokemons[]>([]);
   const [filterType, setFilterType] = useState<string>("");
   const [types, setTypes] = useState<Type[]>([]);
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [totalPokemons, setTotalPokemons] = useState<number>(0);
+
   const limit = 20;
   const offset = (currentPage - 1) * limit;
 
 
   const filterPokemons = useCallback(() => {
-    let filtered = pokemons;
+    let filtered = pokemons.pokemons;
 
     if (searchTerm) {
       filtered = filtered.filter((pokemon) =>
@@ -84,10 +86,8 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
     const fetchPokemons = async () => {
       setLoading(true);
       const { pokemons, count } = await getAllPokemonsWithColor(limit, offset);
-      setPokemons(pokemons);
+      setPokemons({ pokemons, count });
       setLoading(false);
-    
-      setTotalPokemons(count);
       setTotalPages(Math.ceil(count / limit));
 
     };
@@ -105,7 +105,7 @@ export const PokemonProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const getPokemonById = useCallback(
     (id: number) => {
-      return pokemons.find((pokemon) => pokemon.id === id);
+      return pokemons.pokemons.find((pokemon) => pokemon.id === id);
     },
     [pokemons]
   );

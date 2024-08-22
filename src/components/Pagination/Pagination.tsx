@@ -1,6 +1,34 @@
+import { usePokemon } from "../../context/PokedexContext";
+import { Button, PaginationContainer } from "./style";
+
 const Pagination = () => {
-    return <div>Componente de Paginação</div>;
+  const { currentPage, totalPages, setCurrentPage } = usePokemon();
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((page) => page - 1);
+    }
   };
-  
-  export default Pagination;
-  
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((page) => page + 1);
+    }
+  };
+
+  return (
+    <PaginationContainer>
+      <Button onClick={handlePreviousPage} disabled={currentPage === 1}>
+        Previous
+      </Button>
+      <span>
+        Page {currentPage} of {totalPages}
+      </span>
+      <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        Next
+      </Button>
+    </PaginationContainer>
+  );
+};
+
+export default Pagination;

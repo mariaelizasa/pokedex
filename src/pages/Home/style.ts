@@ -5,4 +5,8 @@ export const Filters = styled.div`
   justify-content: center;
   align-items: center;
   margin: 60px 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
