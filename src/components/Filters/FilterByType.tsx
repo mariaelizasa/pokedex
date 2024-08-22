@@ -12,8 +12,8 @@ const FilterByType = () => {
         onChange={(e) => setFilterType(e.target.value)}
       >
         <option value="">ALL</option>
-        {types.map(( type: { type: { name: string, url: string } }) => (
-          <option key={type?.type?.name} value={type?.type?.name}>
+        {types.map(( type: { type: { name: string, url: string } }, index) => (
+          <option key={index} value={type?.type?.name}>
             {type?.type?.name}
           </option>
         ))}
