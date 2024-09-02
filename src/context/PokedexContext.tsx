@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { PokemonResponse, Pokemons } from "../@types/Pokemons";
 import { getAllPokemonsWithColor, getAllTypes } from "../service/requests";
-import { PokemonDetails, Type } from "../@types/PokemonDetails";
+import { PokemonDetails } from "../@types/PokemonDetails";
 import { Types } from "../@types/PokemonTypes";
 
 interface PokemonContextProps {
