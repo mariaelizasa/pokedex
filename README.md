@@ -1,6 +1,8 @@
 <h1 align="center">Pokédex 🎮<h1/>
 
 ![image](https://github.com/user-attachments/assets/ed9859bd-8131-4e56-a408-81c784dda861)
+![pokemon](https://github.com/user-attachments/assets/bd3e2b88-ca5d-4893-bb4c-06953e03264b)
+![psyduckpokemon](https://github.com/user-attachments/assets/b3e86907-3ec5-4a1e-bf36-1d624ee0403a)
 
 ## Como executar / How to run
 
