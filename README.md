@@ -36,7 +36,6 @@ npm run dev
 │       ├── Card
 │       ├── Filters
 │       ├── Icon
-│       ├── Icon
 │       ├── Loading
 │       ├── NotFound
 │       ├── Pagination
@@ -47,7 +46,6 @@ npm run dev
 │       ├── Home
 │   └── routes
 │       ├── routes.tsx 
-│       ├── Home
 │   └── services
 │       ├── api.ts // Api URL
 │       ├── requests.ts 
